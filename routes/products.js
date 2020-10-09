@@ -5,12 +5,20 @@ const productRoutes = (app, fs) => {
     const getData = (filename, timeout = 0, statusCode = 200) => {
       return (req, res) => {
         res.statusCode = statusCode;
-        setTimeout(() => fs.readFile(dataPath, 'utf8', (err, data) => {
+        setTimeout(() => fs.readFile(filename, 'utf8', (err, data) => {
           if (err) {
             throw err;
           }
-    
-          res.send(JSON.parse(data));
+          let parsedData = JSON.parse(data);
+          const { id } = req.query;
+          if(id && id !== 'undefined'){
+            parsedData = parsedData.filter((entry) => {
+              console.log(entry.title, id);
+              return entry.title === id
+            });
+            console.log('hi', parsedData);
+          }
+          res.send(parsedData);
         }), timeout);
       }
     }

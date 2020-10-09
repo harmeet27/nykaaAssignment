@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const actions = (store) => {
-    const getProducts = (state) => {
-        console.log(state);
+    const getProducts = (state, id) => {
+        console.log(id);
         store.setState({
             products:{
                 ...store.getState().products,
@@ -11,7 +11,7 @@ const actions = (store) => {
                 error: false
             }
         })
-        axios.get('/products').then((response) => {
+        axios.get(`/products/?id=${id}`).then((response) => {
             store.setState({
                 products:{
                     ...store.getState().products,
