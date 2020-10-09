@@ -1,28 +1,34 @@
 import React from 'react';
-import axios from 'axios';
+import { connect } from 'redux-zero/react';
+import actions from '../store/actions';
 
 class Homepage extends React.Component {
   constructor(props){
       super(props);
-      this.state= {
-          hasDate: false,
-          loading: false,
-          error: false,
-          data: {}
-      }
   }
 
   componentDidMount(){
-      axios.get('/products').then((res) => this.setState({ data: res}));
+    const{ getProducts } = this.props;
+    getProducts();
   }
 
   render(){
+  const { data, hasData, loading } = this.props;
+  console.log(this.props);
   return (
     <div className="App">
-      <div>{JSON.stringify(this.state.data)}</div>
+      { loading && <div> Loading ...</div>}
+      { hasData && <div>{JSON.stringify(data)}</div>}
     </div>
   );
   }
 }
 
-export default Homepage;
+const mapToProps = ({ products: { data, loading, error, hasData }}) => ({
+    data,
+    loading,
+    error,
+    hasData
+})
+
+export default connect(mapToProps, actions)(Homepage);
