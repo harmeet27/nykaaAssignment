@@ -1,6 +1,6 @@
   .item {
-    height: 30em;
-    width: 20em;
+    height: 480px;
+    width: 320px;
     font-family: 'Quicksand', sans-serif;
     overflow: hidden;
     display: flex;
@@ -16,7 +16,8 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    width: 100vw;
+    width: 100%;
+    margin-top: 50px;
   }
     
   img {

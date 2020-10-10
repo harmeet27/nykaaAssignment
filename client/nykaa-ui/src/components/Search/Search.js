@@ -4,8 +4,9 @@ import './Search.css';
 const Search = ({ onChange, value, className }) => {
   return(
     <input
-    className={className}
+    className={`input ${className}`}
     name="searchKeyword"
+    placeholder="Search"
     value={value}
     onChange={(e) => onChange(e.target.value)}
   />

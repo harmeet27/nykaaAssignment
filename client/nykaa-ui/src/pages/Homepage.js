@@ -13,52 +13,76 @@ class Homepage extends React.Component {
   constructor(props){
       super(props);
       this.state = {
-        searchValue: ''
+        searchValue: '',
+        page: 1,
+        perPage: 20
       };
       this.debouncedOnChange = debounce(this.debouncedOnChange, 1400);
   }
 
+
   componentDidMount(){
-    const{ getProducts } = this.props;
-    getProducts();
+    this.getProductList();
   }
 
+  setPageNumber = () =>{
+    const { page } = this.state;
+    this.setState({
+      page: page + 1
+    }, () => this.getProductList())
+  }
+
+
+  getProductList = () => {
+    const{ getProducts } = this.props;
+    const { page, perPage, searchValue} = this.state;
+    console.log(searchValue);
+    const params = {
+      page,
+      perPage,
+      value: searchValue
+    }
+    getProducts(params) 
+  } 
+
   changeInputValue = (value) => {
-     console.log(value);
      this.setState({
        searchValue: value
      }, () => this.debouncedOnChange(value));
   }
 
   debouncedOnChange = (value) => {
-    console.log(value, 'de');
-    const{ getProducts } = this.props;
-    getProducts(value);
+    const { searchValue } = this.state;
+    this.setState({
+      page: 1,
+      value: searchValue
+    }, () => this.getProductList());
   }
 
   render(){
-  const { data, hasData, loading } = this.props;
-  const { searchValue } = this.state;
+  const { hasData, data, loading, hasMore } = this.props;
+  const { searchValue  } = this.state;
 
   return (
     <div className="root">
       <Header />
       <div className="body">
       <Search onChange={this.changeInputValue} value={searchValue} className="search"/>
-      { loading && <div> Loading ...</div>}
-      { hasData && data.length === 0 && <div>No Records Found</div>}
-      { hasData && <div><Products products={data}/></div>}
+      <Products products={data.records} setPageNumber={this.setPageNumber} hasMore={hasMore} />
+      {loading && <div> Loading ...</div>}
+      {/* { hasData && data.records.length === 0 && <div>No Records Found</div>} */}
       </div>
     </div>
   );
   }
 }
 
-const mapToProps = ({ products: { data, loading, error, hasData }}) => ({
+const mapToProps = ({ products: { data, loading, error, hasData, hasMore }}) => ({
     data,
     loading,
     error,
-    hasData
+    hasData,
+    hasMore
 })
 
 export default connect(mapToProps, actions)(Homepage);
