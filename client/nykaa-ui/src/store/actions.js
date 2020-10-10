@@ -10,8 +10,8 @@ const actions = (store) => {
                 error: false
             }
         })
-        
-        if(query.value){
+        const { prevQuery } = store.getState().products;
+        if(query.value && query.value !== prevQuery){
             store.setState({
                 products:{
                 ...store.getState().products,
@@ -35,6 +35,7 @@ const actions = (store) => {
                       ...store.getState().products.data,
                       records: [...store.getState().products.data.records, ...response.data.results]
                     },
+                    prevQuery: response.data.filter,
                     hasMore: response.data.numOfRecordsLeft > 0
                 }
             })

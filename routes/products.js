@@ -1,3 +1,5 @@
+const { query } = require("express");
+
 const productRoutes = (app, fs) => {
     // variables
     const dataPath = './data/products-dataset.json';
@@ -8,19 +10,19 @@ const productRoutes = (app, fs) => {
           if (err) {
             throw err;
           }
+          const results = {};
           let parsedData = JSON.parse(data);
           const title = req.query.id;
           let filteredData = parsedData;
           if(title && title !== 'undefined'){
-          filteredData = parsedData.filter((entry) => entry.title == title)
+          filteredData = parsedData.filter((entry) => entry.title.toLowerCase().includes(title.toLowerCase()) );
+          results.filter = req.query.id;
           }
           const page =  parseInt(req.query.page);
           const limit =  parseInt(req.query.limit);
 
          const startIndex = (page - 1) * limit;
          const endIndex = page * limit;
-
-        const results = {};
 
         if(endIndex < filteredData.length){
           results.next = {
