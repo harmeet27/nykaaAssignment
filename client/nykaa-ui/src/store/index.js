@@ -1,11 +1,11 @@
-import createStore from 'redux-zero';
-import { connect } from 'redux-zero/devtools';
-import { applyMiddleware } from 'redux-zero/middleware';
+import createStore from "redux-zero";
+import { connect } from "redux-zero/devtools";
+import { applyMiddleware } from "redux-zero/middleware";
 
-import productStore from './store';
+import productStore from "./store";
 
 const initialSate = {
-    products: productStore
+  products: productStore,
 };
 
 const middleware = connect ? applyMiddleware(initialSate) : [];

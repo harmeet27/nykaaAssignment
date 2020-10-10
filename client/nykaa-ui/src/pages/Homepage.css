@@ -1,16 +1,15 @@
-.root{
+.root {
   min-height: 100%;
 }
 
-.search{
-
+.search {
 }
 
-.body{
-   margin-top: 80px;
-   padding: 65px 25px 25px;; 
+.body {
+  margin-top: 80px;
+  padding: 65px 25px 25px;
 }
 
-.catalogue{
+.catalogue {
   padding: 40px;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import './ScrollToTop.css';
+import "./ScrollToTop.css";
 
 export default class ScrollToTop extends Component {
   constructor(props) {
@@ -12,28 +12,28 @@ export default class ScrollToTop extends Component {
 
   componentDidMount() {
     let scrollComponent = this;
-    document.addEventListener("scroll", function(e) {
+    document.addEventListener("scroll", function (e) {
       scrollComponent.toggleVisibility();
     });
   }
 
   toggleVisibility() {
     if (window.pageYOffset > 300) {
-        this.setState({
-          isVisible: true
-        });
-      } else {
-        this.setState({
-          isVisible: false
-        });
-      }
+      this.setState({
+        isVisible: true,
+      });
+    } else {
+      this.setState({
+        isVisible: false,
+      });
+    }
   }
 
   scrollToTop() {
     window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+      top: 0,
+      behavior: "smooth",
+    });
   }
 
   render() {
@@ -42,7 +42,7 @@ export default class ScrollToTop extends Component {
       <div className="scrollToTop">
         {isVisible && (
           <button onClick={() => this.scrollToTop()} className="button">
-              <svg
+            <svg
               xmlns="http://www.w3.org/2000/svg"
               height="38.735"
               width="33.749"
