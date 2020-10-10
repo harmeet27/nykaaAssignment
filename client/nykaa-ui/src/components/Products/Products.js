@@ -1,7 +1,14 @@
 import React, { useRef, useCallback } from 'react';
+import fallback from '../../nykaa_logo.svg';
 import './Products.css';
 
-const Products = ({ products, hasMore, setPageNumber, getProductList }) => {
+const handleError = (e) => {
+  if(e.target.onerror === null){
+    e.target.src = fallback;
+  }
+}
+
+const Products = ({ products, hasMore, setPageNumber }) => {
   const observer = useRef();
   const lastProduct = useCallback((node) => {
     if(observer.current) observer.current.disconnect()
@@ -14,32 +21,34 @@ const Products = ({ products, hasMore, setPageNumber, getProductList }) => {
     if(node){
       observer.current.observe(node);
     }
-    console.log(node);
   }, [ hasMore ]);
 
-
   return (<div className="items">{products.map((product, index) => {
+       const sizes = product.sizeVariation.map((entry) => entry.title);
+       console.log(sizes.join(' '));
        if(products.length === index + 1){
          return (
           <div className="item" ref={lastProduct} key={`product.id${index}`}>
-          <div className="product-img">
-            <img alt={product.name} src={product.imageUrl}/>
+          <div className="productImg">
+            <img alt={product.name} src={product.imageUrl} onError={handleError}/>
           </div>
-          <div className="product-details">
-            <h1 id="product-name">{product.title}</h1>
-            <h4 id="product-description">{product.subTitle}</h4>
+          <div className="productDetails">
+            <h1 className="productName">{product.title}</h1>
+            <h4 className="productDescription">{product.subTitle}</h4>
+            <p className="productDescription">{sizes.join(' ')}</p>
           </div>
           </div>
          )
        }
        return(
        <div className="item" key={`product.id${index}`}>
-       <div className="product-img">
-         <img alt={product.name} src={product.imageUrl}/>
+       <div className="productImg">
+         <img alt={product.name} src={product.imageUrl} onError={handleError}/>
        </div>
-       <div className="product-details">
-         <h1 id="product-name">{product.title}</h1>
-         <h4 id="product-description">{product.subTitle}</h4>
+       <div className="productDetails">
+         <h1 className="productName">{product.title}</h1>
+         <h4 className="productDescription">{product.subTitle}</h4>
+         <p className="productSizes">{sizes.join(' ')}</p>
        </div>
        </div>
        );

@@ -1,14 +1,15 @@
   .item {
-    height: 480px;
-    width: 320px;
+    height: 290px;
+    width: 250px;
     font-family: 'Quicksand', sans-serif;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    margin: .5em;
-    padding: 1em;
-    background-color: white;
-    transition: transform 300ms bounce;
+    margin: 8px;
+    padding: 16px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: -1;
   }
   
   .items {
@@ -20,26 +21,77 @@
     margin-top: 50px;
   }
     
-  img {
-    height: 20em;
+  .item img {
+    height: 165px;
+    width: 178px;
   }
   
-  #product-name {
+  .productDetails{
+    text-align: left;
+  }
+
+  .productName {
     border-top: 1px solid lightgrey;
-    padding: 1em 0 0;
-    font-size: 1.5em;
+    padding: 16px 0 0;
+    font-size: 18px;
     font-family: 'Lato', sans-serif;
-    margin: .5em 0;
+    margin: 8px 0;
   }
   
-  #product-description {
-    font-size: 1em;
+  .productDescription {
+    font-size: 16px;
     font-family: 'Lato', sans-serif;
     color: grey;
     font-weight: lighter;
     margin: 0;
   }
+
+  .productSizes{
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+    color: grey;
+    font-weight: lighter;
+  }
   
-  #product-price {
-    font-size: 1em;
+
+  @media screen and (max-width: 600px) {
+    .item {
+      height: 250px;
+      width: 152px;
+      font-family: 'Quicksand', sans-serif;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      margin: 5px;
+      padding: 5px;
+      background-color: white;
+    }
+
+    .item img {
+      height: 160px;
+      width: 152px;
+    }
+
+    .productDescription {
+      font-size: 10px;
+      font-family: 'Lato', sans-serif;
+      color: grey;
+      font-weight: lighter;
+      margin: 0;
+    }
+
+    .productName {
+      border-top: 1px solid lightgrey;
+      padding: 10px 0 0;
+      font-size: 12px;
+      font-family: 'Lato', sans-serif;
+      margin: 8px 0;
+    }
+
+    .productSizes{
+      font-size: 10px;
+      font-family: 'Lato', sans-serif;
+      color: grey;
+      font-weight: lighter;
+    }
   }
