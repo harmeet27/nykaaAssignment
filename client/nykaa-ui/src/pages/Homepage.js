@@ -8,6 +8,7 @@ import './Homepage.css';
 import Products from '../components/Products/Products';
 import Search from '../components/Search/Search';
 import Header from '../components/Header/Header';
+import ScrollToTop from '../components/ScrollToTop/ScrollToTop';
 
 class Homepage extends React.Component {
   constructor(props){
@@ -69,8 +70,8 @@ class Homepage extends React.Component {
       <div className="body">
       <Search onChange={this.changeInputValue} value={searchValue} className="search"/>
       <Products products={data.records} setPageNumber={this.setPageNumber} hasMore={hasMore} />
-      {loading && <div> Loading ...</div>}
-      {/* { hasData && data.records.length === 0 && <div>No Records Found</div>} */}
+      <ScrollToTop />
+      {loading && <div> Fetching ...</div>}
       </div>
     </div>
   );
